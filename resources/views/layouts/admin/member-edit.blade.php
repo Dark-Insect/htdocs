@@ -176,7 +176,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label style="font-weight: bold;" for="txt_type_loan fw-bold">Other Information: Husband/Spouse</label>
+                                <label style="font-weight: bold;" for="txt_type_loan fw-bold">Other Information: Spouse</label>
                                 <div class="form-group col-md-4">
                                   <label for="txt_type_loan">First name</label>
                                   <input value="{{ $user->hs_first_name }}" type="text" class="form-control" id="txt_hs_first_name" placeholder="Enter First name" name="txt_hs_first_name" >
