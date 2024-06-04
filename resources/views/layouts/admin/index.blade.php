@@ -60,7 +60,7 @@
                                             @endforeach
                                             <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-payment-user-loan-lists', $user->id) }}"><i class="fas fa-eye"></i>View Active loan</a>
                                             <a class="btn btn-primary btn-sm" href="{{ route('admin.member.edit', $user->id) }}"><i class="fas fa-pen"></i></a>
-
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.transaction', $user->id) }}"><i class="fas fa-truck"></i></a>
                                                 <!-- <form action="{{ route('admin.member.update', $user->id) }}" method="post">
                                             @csrf
                                             @method('PUT')

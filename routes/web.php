@@ -16,6 +16,7 @@ use App\Http\Controllers\member\InterfaceMemberController;
 use App\Http\Controllers\member\AccountSettingsController;
 use App\Http\Controllers\staff\StaffController;
 use App\Http\Controllers\admin\PersonalInformationController;
+use App\Http\Controllers\admin\TransactionHistoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +44,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 Route::get('interface',[InterfaceController::class,'interface'])->name('member.interface');
 Route::get('members/personal/{id}',[PersonalInformationController::class,'personal'])->name('member.personal');
+Route::get('members/transaction/{id}',[TransactionHistoryController::class,'transaction'])->name('member.transaction');
 
 Route::get('members/archive/{id}',[ArchiveController::class,'restore'])->name('restore');
 // Create Routes

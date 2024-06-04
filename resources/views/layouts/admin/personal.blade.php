@@ -14,6 +14,33 @@
             {{ session('success') }}
         </div>
     @endif
+    <style>
+    #printable-section {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        margin: 20px auto;
+        max-width: 600px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    p {
+        color: #666;
+    }
+
+    /* Hide the button when printing */
+    @media print {
+        button {
+            display: none;
+        }
+    }
+</style>
+<button style="width: 90px; background-color: red; border-radius: 9px; color: white;" onclick="printPage()">Print</button>
+    <div id="printable-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
@@ -151,5 +178,19 @@
 <!-- The rest of the form fields can be similarly replaced with paragraph elements -->
 
     </div>
+   
+    </div>
+ 
+    <script>
+    function printPage() {
+        var printContent = document.getElementById("printable-section");
+        var originalContent = document.body.innerHTML;
+        document.body.innerHTML = printContent.innerHTML;
+        window.print();
+        document.body.innerHTML = originalContent;
+    }
+</script>
+
 </main>
+
 @endsection
