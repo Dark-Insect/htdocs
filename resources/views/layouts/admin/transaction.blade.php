@@ -1,100 +1,99 @@
 @extends('layouts.global.dashboard')
 
-@section('title', 'Loan Request')
+@section('title', 'Members')
 
 @section('content')
 <main>
-    @if (session('success'))
-        <div class="alert alert-success text-center">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('danger'))
+    @if (session('deleted'))
         <div class="alert alert-danger text-center">
-            {{ session('danger') }}
+            {{ session('deleted') }}
         </div>
     @endif
     <div class="container-fluid px-4">
-        <div class="d-flex justify-content-between">
-          <div>
-            <h1 class="mt-4">Review Loan</h1>
-          </div>
-          <div class="d-flex justify-content-between" style="gap: 20px;">
-            @if ($data->loan_approved == "approved" || $data->loan_approved == "declined")
-            
-            @else
-              <form action="{{ route('admin.loan-review-approved',$id) }}" class="mt-4" method="POST">
-                @csrf
-                @method('PUT')
-                <input class="btn btn-success" type="submit" value="Approve">
-              </form>
-              <form action="{{ route('admin.loan-review-declined',$id) }}" class="mt-4" method="POST">
-                @csrf
-                @method('PUT')
-                <input class="btn btn-danger" type="submit" value="Decline">
-              </form>
-            @endif
-          </div>
-        </div>
+        <h1 class="mt-4">Transaction History</h1>
         <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+            </div>
             <div class="card-body">
-              <table class="table table-bordered mb-0">
-                <tr>
-                  <th class="w-25">Fullname</th>
-                  <td class="w-25"><a href="{{ route('admin.member.show', $data->id) }}">{{ $data->first_name . " " . $data->last_name }}</a></td>
-                  <th class="w-25">Date Submitted</th>
-                  <td class="w-25">{{ \Carbon\Carbon::parse($data->loan_request_date)->format('F d Y, l') }}</td>
-                </tr>
-                <tr>
-                  <th class="w-25">Loan Amount</th>
-                  <td class="w-25">₱{{ $data->loan_amount }}</td>
-                  <th class="w-25">Loan Purpose</th>
-                  <td class="w-25">{{ $data->loan_purpose }}</td>
-                </tr>
-                <tr>
-                  <th class="w-25">Weekly Income</th>
-                  <td class="w-25">₱{{ $data->loan_weekly_earn }}</td>
-                  <th class="w-25">Loan Term</th>
-                  <td class="w-25">{{ $term }}</td>
-                </tr>
-                <tr>
-                  <th class="w-25">Interest</th>
-                  <!-- <td class="w-25">₱{{ $data->interest }}</td> -->
-                  <!-- <td class="w-25">
-                      <input type="text" name="interest" value="{{ $data->interest }}">
-                  </td> -->
-                <td class="w-25">
-                    <input type="text" name="interest" placeholder="₱" value="₱">
-                </td>
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                           <th>Fullname</th>
+                           <th>Member ID</th>
+                            <th>Status</th>
+                            <th>Loan Amount</th>
+                            <th>Loan Balance</th>
+                            <th>Loan Type</th>
+                            <th>Loan Term</th>
+                            <th>Interest</th>
+                            <th>Principal</th>
+                            <th>Loan Amortization</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                           <th>Fullname</th>
+                            <th>Member ID</th>
+                            <th>Status</th>
+                            <th>Loan Amount</th>
+                            <th>Loan Balance</th>
+                            <th>Loan Type</th>
+                            <th>Loan Term</th>
+                            <th>Interest</th>
+                            <th>Principal</th>
+                            <th>Loan Amortization</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @isset($users)
+                            @if ($users)
+                                @foreach ($users as $user)
+                                    @if ($user->role === 'member')
+                                        <tr>
+                                            {{-- <td>
+                                                <img src="{{ asset($user->photo) }}" width='50' height='50' class="img img-reponsive" />
+                                            </td> --}}
+                                            <td>
+                                                <img src="{{ asset('storage/' . $user->photo) }}" width='50' height='50' class="img img-reponsive"  alt="User Photo"/>
+                                            </td> 
+                                            <td>
+                                              <a href="{{ route('admin.member.personal', $user->id) }}">{{ $user->first_name . " " . $user->last_name }}</a>
+                                            </td>
+                                            <td>{{ $user->memberId }}</td>
+                                            @foreach($loans as $loan)
+                                            <td>{{ $loan->loan_purpose}}</td>
+                                            @endforeach
+                                            <td style="display: flex;">
+                                            @foreach ($loans as $loan)
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-review', $loan->loan_id) }}">Review</a>
+                                            @endforeach
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-payment-user-loan-lists', $user->id) }}"><i class="fas fa-eye"></i>View Active loan</a>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.edit', $user->id) }}"><i class="fas fa-pen"></i></a>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.transaction', $user->id) }}"><i class="fas fa-truck"></i></a>
+                                                <!-- <form action="{{ route('admin.member.update', $user->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-box-archive"></i> Update Role</button>
+                                        </form> -->
 
-                  <th class="w-25">Principal</th>
-                  <!-- <td class="w-25">₱{{ $data->principal }}</td> -->
-                  <td class="w-25">
-                    <input type="text" name="principal" placeholder="₱" value="₱">
-                </td>
-                </tr>
-                <tr>
-                  <th class="w-25" colspan="3">Loan Amortization</th>
-                  <!-- <td class="w-25" colspan="2">₱{{ $data->loan_amortization }}</td> -->
-                  <td class="w-25">
-                    <input type="text" name="loan_amortization" placeholder="₱" value="₱">
-                </td>
-                </tr>
-              </table>
-            </table>
+
+                                                <form action="{{ route('admin.member.destroy', $user->id) }}" method="post">
+                                                    @csrf
+                                                        <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-box-archive"></i></button>
+                                                    @method('DELETE')
+                                                </form>
+                                                {{-- <a class="btn btn-secondary btn-sm" href="{{ route('admin.member.delete', $user->id) }}"><i class="fas fa-trash"></i></a> --}}
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endisset
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        {{-- Disable View File --}}
-        {{-- <h1 class="mt-4">Documents</h1>
-        <p><a target="_blank" href="{{ asset('storage/uploads/' . $data->loan_uploaded_name) }}">View Full Size</a></p>
-        <div class="card mb-4">
-            <div class="card-body">
-              <div class="embed-responsive embed-responsive-21by9">
-                <iframe style="height: 80vh" class="w-100 embed-responsive-item" src="{{ asset('storage/uploads/' . $data->loan_uploaded_name) }}"></iframe>
-              </div>
-            </div>
-        </div> --}}
     </div>
 </main>
 @endsection

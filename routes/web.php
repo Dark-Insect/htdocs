@@ -17,6 +17,7 @@ use App\Http\Controllers\member\AccountSettingsController;
 use App\Http\Controllers\staff\StaffController;
 use App\Http\Controllers\admin\PersonalInformationController;
 use App\Http\Controllers\admin\TransactionHistoryController;
+use App\Http\Controllers\admin\ValidateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 Route::get('interface',[InterfaceController::class,'interface'])->name('member.interface');
 Route::get('members/personal/{id}',[PersonalInformationController::class,'personal'])->name('member.personal');
 Route::get('members/transaction/{id}',[TransactionHistoryController::class,'transaction'])->name('member.transaction');
+Route::get('members/validate/{id}',[ValidateController::class,'validation'])->name('member.validate');
 
 Route::get('members/archive/{id}',[ArchiveController::class,'restore'])->name('restore');
 // Create Routes
@@ -100,6 +102,7 @@ Route::delete('/members/{id}', [AdminController::class, 'destroy'])->name('membe
 Route::prefix('staff')->name('staff.')->middleware('auth')->group(function () {
     Route::get('index',[StaffController::class,'index'])->name('index');
     Route::get('interface',[StaffController::class,'interface'])->name('interface');
+    Route::get('print/{id}',[StaffController::class,'print'])->name('member.print');
 }); 
 
 // MEMBER DASHBOARD

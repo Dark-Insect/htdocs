@@ -49,18 +49,22 @@
                             </a>
                             <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('admin.member.index') }}">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
-                                        View Members
-                                    </a>
-                                    <a class="nav-link" href="{{ route('admin.member.create') }}">
+                                <a class="nav-link" href="{{ route('admin.member.create') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
                                         Create Member
                                     </a>
+                                    <a class="nav-link" href="{{ route('admin.member.index') }}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
+                                        View Members
+                                    </a>   
+                                    <a class="nav-link" href="{{ route('staff.member.print', $user->id) }}">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-print"></i></div>
+                                        Print
+                                    </a>                                
                                 </nav>
                             </div>
                             {{-- Load Management --}}
-                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="true" aria-controls="collapseLayouts">
+                            <!-- <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="true" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-credit-card"></i></div>
                                 Loan Lists
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -92,12 +96,12 @@
                                 Loan Management
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a> -->
-                            <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <!-- <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     {{-- <a class="nav-link" href="{{ route('admin.loan.lists') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                         Loan Lists
-                                    </a> --}}
+                                    </a> --}} -->
                                     <!-- <a class="nav-link" href="{{ route('admin.loan-request.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-bell"></i></div>
                                         Borrowers
@@ -109,7 +113,7 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-dollar"></i></div>
                                         Payments
                                     </a> -->
-                                    {{-- <a class="nav-link" href="{{ route('admin.savings.index') }}">
+                                    <!-- {{-- <a class="nav-link" href="{{ route('admin.savings.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-bank"></i></div>
                                         Savings
                                     </a> --}}
@@ -117,16 +121,16 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                                         Loan Proposal Sheet
                                     </a> --}}
-                                </nav>
+                                </nav> -->
 
 
                                 <!-- Archive Test -->
-                                <a class="nav-link" href="{{ route('member.loan-current') }}">
+                                <!-- <a class="nav-link" href="{{ route('member.loan-current') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                                         Currently Monthly Payments
-                                    </a>
+                                    </a> -->
                                 
-                            </div>
+                            <!-- </div> --> 
                         </div>
                     @endif
                     @if (auth()->user()->role === "member")
@@ -144,7 +148,7 @@
 
                                 <a class="nav-link" href="{{ route('admin.member.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                        Profile
+                                        My Profile
                                     </a>
                                     <a class="nav-link" href="{{ route('member.mail.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
