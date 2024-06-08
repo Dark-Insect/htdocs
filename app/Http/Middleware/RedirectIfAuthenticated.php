@@ -27,7 +27,7 @@ class RedirectIfAuthenticated
                 } elseif(auth()->user()->role === 'member') {
                     return redirect(route('member.mail.index')); // Redirect to user dashboard
                 }elseif(auth()->user()->role === 'staff'){
-                    return route('staff.interface');
+                    return redirect(route('staff.interface'));
                 }
             }
         }

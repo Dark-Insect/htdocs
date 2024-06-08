@@ -58,11 +58,13 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->phone }}</td>
                                             <td style="display: flex;">
-                                            @foreach ($loans as $loan)
+                                            <!-- @foreach ($loans as $loan)
                                             <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-review', $loan->loan_id) }}">Review</a>
                                             @endforeach
                                             <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-payment-user-loan-lists', $user->id) }}"><i class="fas fa-eye"></i>View Active loan</a>
-                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.edit', $user->id) }}"><i class="fas fa-pen"></i></a>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.edit', $user->id) }}"><i class="fas fa-pen"></i></a> -->
+                                            <a class="btn btn-primary btn-sm" href="#"><i class="fa-solid fa-circle-check"></i>Confirm Payment</a>
+                                            <a class="btn btn-success btn-sm" href="{{ route('staff.member.print', $user->id) }}"><i class="fa fa-print"></i>Print</a>
 
                                                 <!-- <form action="{{ route('admin.member.update', $user->id) }}" method="post">
                                             @csrf
@@ -71,13 +73,13 @@
                                         </form> -->
 
 
-                                                <form action="{{ route('admin.member.destroy', $user->id) }}" method="post">
+                                                <!-- <form action="{{ route('admin.member.destroy', $user->id) }}" method="post">
                                                     @csrf
                                                         <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-box-archive"></i></button>
                                                     @method('DELETE')
                                                 </form>
                                                 {{-- <a class="btn btn-secondary btn-sm" href="{{ route('admin.member.delete', $user->id) }}"><i class="fas fa-trash"></i></a> --}}
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     @endif
                                 @endforeach

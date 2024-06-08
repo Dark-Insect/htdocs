@@ -53,14 +53,11 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
                                         Create Member
                                     </a>
-                                    <a class="nav-link" href="{{ route('admin.member.index') }}">
+                                    <a class="nav-link" href="{{ route('staff.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                                         View Members
                                     </a>   
-                                    <a class="nav-link" href="{{ route('staff.member.print', $user->id) }}">
-                                        <div class="sb-nav-link-icon"><i class="fa fa-print"></i></div>
-                                        Print
-                                    </a>                                
+                                                             
                                 </nav>
                             </div>
                             {{-- Load Management --}}

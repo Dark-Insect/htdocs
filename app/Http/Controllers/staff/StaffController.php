@@ -5,11 +5,16 @@ namespace App\Http\Controllers\staff;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class StaffController extends Controller
 {
     public function index(){
-        return view('layouts.staff.index');
+        $users = User::all(); // Fetch all users from the database
+        $loans = DB::table('loan_request')
+        ->join('users', 'loan_request.user_id', '=', 'users.id')
+        ->get();
+        return view('layouts.staff.index', compact('users','loans'));
     }
     public function interface(){
         return view('layouts.staff.interface');

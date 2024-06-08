@@ -22,6 +22,7 @@
                             <th> 1x1 Picture</th>
                             <th>Name</th>
                             <th>Member ID</th>
+                            <th>Loan Type</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                            <th>1x1 Picture</th>
                             <th>Name</th>
                             <th>Member ID</th>
+                            <th>Loan Type</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
@@ -49,10 +51,17 @@
                                               <a href="{{ route('admin.member.personal', $user->id) }}">{{ $user->first_name . " " . $user->last_name }}</a>
                                             </td>
                                             <td>{{ $user->memberId }}</td>
-                                           
+                                            @foreach($loans as $loan)
+                                            <td>{{ $loan->loan_purpose}}</td>
+                                            @endforeach
                                             <td style="display: flex;">
-                                            
-                                            <a class="btn btn-primary btn-sm" href="#"><i class="fa-solid fa-circle-check"></i>Confirm Payment</a>
+                                            @foreach ($loans as $loan)
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-review', $loan->loan_id) }}">Review</a>
+                                            @endforeach
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-payment-user-loan-lists', $user->id) }}"><i class="fas fa-eye"></i>View Active loan</a>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.edit', $user->id) }}"><i class="fas fa-pen"></i></a>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.transaction', $user->id) }}"><i class="fas fa-truck"></i></a>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.validate', $user->id) }}"><i class="fa-solid fa-circle-check"></i></a>
                                                 <!-- <form action="{{ route('admin.member.update', $user->id) }}" method="post">
                                             @csrf
                                             @method('PUT')
@@ -60,13 +69,13 @@
                                         </form> -->
 
 
-                                                <!-- <form action="{{ route('admin.member.destroy', $user->id) }}" method="post">
+                                                <form action="{{ route('admin.member.destroy', $user->id) }}" method="post">
                                                     @csrf
                                                         <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-box-archive"></i></button>
                                                     @method('DELETE')
                                                 </form>
                                                 {{-- <a class="btn btn-secondary btn-sm" href="{{ route('admin.member.delete', $user->id) }}"><i class="fas fa-trash"></i></a> --}}
-                                            </td> -->
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach
