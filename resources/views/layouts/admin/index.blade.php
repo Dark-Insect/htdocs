@@ -22,7 +22,9 @@
                             <th> 1x1 Picture</th>
                             <th>Name</th>
                             <th>Member ID</th>
-                            <th>Loan Type</th>
+                            @if($loans->isNotEmpty() && $loans->first()->loan_purpose !== null)
+                <th>Loan Type</th>
+            @endif
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -31,7 +33,9 @@
                            <th>1x1 Picture</th>
                             <th>Name</th>
                             <th>Member ID</th>
-                            <th>Loan Type</th>
+                            @if($loans->isNotEmpty() && $loans->first()->loan_purpose !== null)
+                <th>Loan Type</th>
+            @endif
                             <th>Actions</th>
                         </tr>
                     </tfoot>

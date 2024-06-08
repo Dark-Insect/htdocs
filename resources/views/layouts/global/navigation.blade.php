@@ -143,30 +143,30 @@
                             <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
 
-                                <a class="nav-link" href="{{ route('admin.member.index') }}">
+                                <a class="nav-link" href="{{ route('member.profile') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                         My Profile
                                     </a>
-                                    <a class="nav-link" href="{{ route('member.mail.index') }}">
-                                        <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
-                                        Notification
-                                    </a>
-                                    <a class="nav-link" href="{{ route('member.loan.index') }}">
+                                        <!-- <a class="nav-link" href="{{ route('member.mail.index') }}">
+                                            <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
+                                            Notification
+                                        </a> -->
+                                    <!-- <a class="nav-link" href="{{ route('member.loan.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-peso-sign"></i></div>
                                         Loan
-                                    </a>
+                                    </a> -->
                                     <a class="nav-link" href="{{ route('member.loan.create') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-peso-sign"></i></div>
-                                        New Loan
+                                        Apply Loan
                                     </a>
-                                    <a class="nav-link" href="{{ route('member.loan-balance-index') }}">
+                                    <!-- <a class="nav-link" href="{{ route('member.loan-balance-index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-wallet"></i></div>
                                         Loan Balance
                                     </a>
                                     <a class="nav-link" href="{{ route('member.loan-current') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                                         Currently Monthly Payments
-                                    </a>
+                                    </a> -->
                                     <a class="nav-link" href="{{ route('member.mail.settings') }}">
                                         <div class="sb-nav-link-icon"><i class="fa-solid fa-gear"></i></div>
                                         Account Settings

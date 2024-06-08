@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Models\User;
 
 class MemberController extends Controller
 {
@@ -40,6 +41,10 @@ class MemberController extends Controller
     }
 
     public function profile(){
-        return view('layouts.member.profile');
+        $users = User::all(); // Fetch all users from the database
+        $loans = DB::table('loan_request')
+        ->join('users', 'loan_request.user_id', '=', 'users.id')
+        ->get();
+        return view('layouts.member.profile', compact('users','loans'));
     }
 }
