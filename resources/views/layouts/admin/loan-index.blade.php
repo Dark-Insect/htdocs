@@ -21,7 +21,7 @@
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between mt-4 mb-4">
             <div class="d-flex align-items-center">
-                <h4>Loan Payment History</h4>
+                <h4>Loan Amortization Schedule</h4>
             </div>
             {{-- <div class="d-flex align-items-center">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -29,7 +29,7 @@
                 </button>
             </div> --}}
         </div>
-        <div>
+        {{-- <div>
             <table class="table table-bordered">
                 <tr>
                     <th>Loan Amount</th>
@@ -44,7 +44,7 @@
                     <td>₱{{ $loan->loan_amortization }}</td>
                 </tr>
             </table>
-        </div>
+        </div> --}}
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -53,13 +53,12 @@
                 <table class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Loan ID</th>
+                            <th scope="col">Member ID</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Amortization</th>
                             <th scope="col">Principal</th>
                             <th scope="col">Interest</th>
-                            <th scope="col">Loan Amortization</th>
                             <th scope="col">Balance</th>
-                            <th scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,13 +66,17 @@
                             @if ($loans)
                                 @foreach ($loans as $loan)
                                     <tr>
-                                        <td>{{ $loan->history_id }}</td>
-                                        <td>{{ $loan->loan_id }}</td>
+                                        @foreach ($users as $user)
+                                        @if ($user->id == $loan->user_id)
+                                            <td>{{ $user->memberId }}</td>
+                                            @break
+                                        @endif
+                                    @endforeach
+                                        <td>{{ \Carbon\Carbon::parse($loan->date)->format('d/m/Y') }}</td>
+                                        <td>₱{{ $loan->loan_amortization }}</td>
                                         <td>₱{{ $loan->principal }}</td>
                                         <td>₱{{ $loan->interest }}</td>
-                                        <td>₱{{ $loan->loan_amortization }}</td>
                                         <td>₱{{ $loan->balance }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($loan->date)->format('F d Y, l') }}</td>
                                     </tr>
                                 @endforeach
                             @else

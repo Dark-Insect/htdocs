@@ -31,6 +31,11 @@ class LoanPaymentController extends Controller
 
     public function viewLoan($loan_id)
     {
+
+        $users = User::all(); // Fetch all users from the database
+        $loans = DB::table('loan_request')
+        ->join('users', 'loan_request.user_id', '=', 'users.id')
+        ->get();
         $status = DB::table('loan_request')->where('loan_id', $loan_id)->first();
         if($status != "pending")
         {
@@ -40,7 +45,7 @@ class LoanPaymentController extends Controller
 
             $loan_id = $loan_id;
 
-            return view('layouts.admin.loan-index',compact('loans','user_id','loan_id','loan'));
+            return view('layouts.admin.loan-index',compact('users','loans','user_id','loan_id','loan'));
         }
     }
 
