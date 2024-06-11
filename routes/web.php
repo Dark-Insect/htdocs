@@ -18,6 +18,10 @@ use App\Http\Controllers\staff\StaffController;
 use App\Http\Controllers\admin\PersonalInformationController;
 use App\Http\Controllers\admin\TransactionHistoryController;
 use App\Http\Controllers\admin\ValidateController;
+use App\Http\Controllers\PaymentHistoryController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ScheduleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +46,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Route::resource('/members', AdminController::class,['names' => 'member']);
     Route::get('/members', [AdminController::class, 'index'])->name('member.index');
 //Interface
+
+Route::get('paymentHistory',[PaymentHistoryController::class,'payment'])->name('member.payment');
+Route::get('review',[ReviewController::class,'review'])->name('member.review');
+Route::get('schedule',[ScheduleController::class,'schedule'])->name('member.schedule');
 
 Route::get('interface',[InterfaceController::class,'interface'])->name('member.interface');
 Route::get('members/personal/{id}',[PersonalInformationController::class,'personal'])->name('member.personal');
@@ -70,7 +78,7 @@ Route::delete('/members/{id}', [AdminController::class, 'destroy'])->name('membe
     Route::put('notifications/update', [MemberReminderController::class,'setSetting'])->name('notifications.update');
 
     Route::get('admin/archive',[ArchiveController::class,'archive'])->name('archive');
-    
+
 
     // Loan Review
     Route::get('loan-review/{id}',[LoanRequestController::class,'ReviewLoanRequest'])->name('loan-review');
@@ -103,13 +111,13 @@ Route::prefix('staff')->name('staff.')->middleware('auth')->group(function () {
     Route::get('index',[StaffController::class,'index'])->name('index');
     Route::get('interface',[StaffController::class,'interface'])->name('interface');
     Route::get('print/{id}',[StaffController::class,'print'])->name('member.print');
-}); 
+});
 
 // MEMBER DASHBOARD
 Route::prefix('member')->name('member.')->middleware('auth')->group(function () {
     Route::resource('/notifications', MemberController::class,['names' => 'mail']);
     Route::resource('/loan', LoanController::class,['names' => 'loan']);
-   
+
     Route::get('profile',[MemberController::class,'profile'])->name('profile');
     //Account Settings
     Route::get('/account-settings',[AccountSettingsController::class,'account_settings'])->name('mail.settings');
@@ -129,5 +137,6 @@ Route::prefix('member')->name('member.')->middleware('auth')->group(function () 
 });
 
 Auth::routes();
+Auth::routes(['register' => false]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

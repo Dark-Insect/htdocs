@@ -10,7 +10,7 @@
         </div>
     @endif
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Loan Requests</h1>
+        <h1 class="mt-4">Review</h1>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -59,22 +59,10 @@
                                             <td>{{ $loan->loan_purpose}}</td>
                                             @endforeach
                                             <td style="display: flex;">
-                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-payment-user-loan-lists', $user->id) }}"><i class="fas fa-eye"></i>View Active loan</a>
-                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.edit', $user->id) }}"><i class="fas fa-pen"></i></a>
-                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.transaction', $user->id) }}"><i class="fas fa-truck"></i></a>
-                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.member.validate', $user->id) }}"><i class="fa-solid fa-circle-check"></i></a>
-                                                <!-- <form action="{{ route('admin.member.update', $user->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-box-archive"></i> Update Role</button>
-                                        </form> -->
-
-
-                                                <form action="{{ route('admin.member.destroy', $user->id) }}" method="post">
-                                                    @csrf
-                                                        <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-box-archive"></i></button>
-                                                    @method('DELETE')
-                                                </form>
+                                            @foreach ($loans as $loan)
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.loan-review', $loan->loan_id) }}">Review</a>
+                                            @endforeach
+                                        
                                                 {{-- <a class="btn btn-secondary btn-sm" href="{{ route('admin.member.delete', $user->id) }}"><i class="fas fa-trash"></i></a> --}}
                                             </td>
                                         </tr>

@@ -17,7 +17,7 @@ class RegisterController extends Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
+    | validation and creation. By default, this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
     */
@@ -29,7 +29,6 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
         if (auth()->user()->role === 'admin') {
@@ -47,6 +46,14 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+
+        // Redirect any requests directly to the registration page to a 404 page
+        $this->middleware(function ($request, $next) {
+            if ($request->is('register')) {
+                abort(405);
+            }
+            return $next($request);
+        });
     }
 
     /**
@@ -84,3 +91,48 @@ class RegisterController extends Controller
         ]);
     }
 }
+
+
+//--------------------------------the following section is shorthand logic above---------------------------------------------------------
+
+
+// <?php
+
+// namespace App\Http\Controllers\Auth;
+
+// use App\Http\Controllers\Controller;
+// use Illuminate\Http\Request;
+
+// class RegisterController extends Controller
+// {
+
+//     |--------------------------------------------------------------------------
+//     | Register Controller
+//     |--------------------------------------------------------------------------
+//     |
+//     | This controller handles the registration of new users as well as their
+//     | validation and creation. By default, this controller uses a trait to
+//     | provide this functionality without requiring any additional code.
+//     |
+
+
+//     use RegistersUsers;
+
+
+//      * Create a new controller instance.
+//      *
+//      * @return void
+
+//     public function __construct()
+//     {
+//         $this->middleware('guest');
+
+//          Redirect any requests directly to the registration page to a 404 page
+//         $this->middleware(function ($request, $next) {
+//             if ($request->is('register')) {
+//                 abort(404);
+//             }
+//             return $next($request);
+//         });
+//     }
+// }

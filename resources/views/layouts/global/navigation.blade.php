@@ -56,8 +56,8 @@
                                     <a class="nav-link" href="{{ route('staff.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                                         View Members
-                                    </a>   
-                                                             
+                                    </a>
+
                                 </nav>
                             </div>
                             {{-- Load Management --}}
@@ -126,8 +126,8 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                                         Currently Monthly Payments
                                     </a> -->
-                                
-                            <!-- </div> --> 
+
+                            <!-- </div> -->
                         </div>
                     @endif
                     @if (auth()->user()->role === "member")
@@ -208,6 +208,14 @@
                                     <a class="nav-link" href="{{ route('admin.member.index') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                                         View Members
+                                    </a>
+                                    <a class="nav-link" href="{{ route('admin.member.payment') }}">
+                                        <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
+                                        Payment History
+                                    </a>
+                                    <a class="nav-link" href="{{ route('admin.member.review') }}">
+                                        <div class="sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                        Review
                                     </a>
                                     <a class="nav-link" href="{{ route('admin.archive') }}">
                                         <div class="sb-nav-link-icon"><i class="fas fa-file-zipper"></i></div>
